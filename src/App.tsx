@@ -15,21 +15,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route element={<RouteProtection />}>
             <Route path="/home" element={<HomeLogged />} />
-            <Route
-              path="/decks"
-              element={
-                <Decks
-                  decks={dataDecks}
-                  cartes={dataCartes}
-                  onReloadCartes={reloadCartes}
-                  onReloadDecks={reloadDecks}
-                />
-              }
-            />
-            <Route
-              path="/play"
-              element={<Play decks={dataDecks} cartes={dataCartes} />}
-            />
+            <Route path="/decks" element={<Decks />} />
+            <Route path="/play" element={<Play />} />
           </Route>
         </Routes>
       </BrowserRouter>

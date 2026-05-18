@@ -8,9 +8,13 @@ import addCarte from "./modules/AddModule";
 export interface MesDecksProps {
   onReloadCartes: () => void;
   onReloadDecks: () => void;
+  decks: Deck[];
+  cards: Card[];
 }
 
 export default function MesDecks({
+  decks,
+  cards,
   onReloadCartes,
   onReloadDecks,
 }: MesDecksProps) {
@@ -34,7 +38,7 @@ export default function MesDecks({
     setAddingCarteDeckId(null);
     setMot("");
     setTrad("");
-    onReloadCartes();
+    // onReloadCartes();
   };
 
   const inputClass =
@@ -45,7 +49,7 @@ export default function MesDecks({
       {decks
         .sort((a, b) => a.id - b.id)
         .map((deck) => {
-          const cartesDeck = cartes.filter((c) => c.deck_id === deck.id);
+          const cartesDeck = cards.filter((c) => c.deckId === deck.id);
           const isEditing = editingDeckId === deck.id;
           const isAddingCarte = addingCarteDeckId === deck.id;
 
@@ -61,7 +65,7 @@ export default function MesDecks({
                 {isEditing ? (
                   <div className="flex gap-2 items-center flex-1">
                     <input
-                      defaultValue={deck.name}
+                      defaultValue={deck.title}
                       onChange={(e) => setNewName(e.target.value)}
                       onKeyDown={(e) =>
                         e.key === "Enter" &&
@@ -85,7 +89,7 @@ export default function MesDecks({
                   </div>
                 ) : (
                   <h2 className="font-serif text-2xl text-ink flex-1">
-                    {deck.name}
+                    {deck.title}
                   </h2>
                 )}
 

@@ -34,7 +34,7 @@ export default function Home() {
 
       <div className="flex gap-3 flex-wrap justify-center">
         {loginModal ? (
-          <LoginModal closeModal={setLoginModal(false)} />
+          <LoginModal closeModal={() => setLoginModal(false)} />
         ) : (
           <button
             onClick={() => setLoginModal(true)}
@@ -44,10 +44,10 @@ export default function Home() {
           </button>
         )}
         {registerModal ? (
-          <RegisterModal closeModal={setRegisterModal(false)} />
+          <RegisterModal closeModal={() => setRegisterModal(false)} />
         ) : (
           <button
-            onClick={() => setLoginModal(true)}
+            onClick={() => setRegisterModal(true)}
             className="px-6 py-3 rounded-xl text-sm font-medium text-inkborder-[1.5px] border-border bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 shadow-sm"
           >
             M'inscrire
