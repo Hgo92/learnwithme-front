@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate } from "react-router";
 import LoginModal from "../components/authentication/LoginModal";
 import RegisterModal from "../components/authentication/RegisterModal";
 
@@ -6,10 +7,16 @@ import { authClient } from "../lib/auth-client";
 
 export default function Home() {
   const handleInvit = async () => {
-    await authClient.signIn.email({
+    const { data, error } = await authClient.signIn.email({
       email: "hugo@example.com",
       password: "mdpInvit",
     });
+    if (error) {
+      console.error("Erreur de connexion :", error.message);
+      return;
+    }
+
+    <Navigate to="/home" />;
   };
 
   const [loginModal, setLoginModal] = useState(false);
