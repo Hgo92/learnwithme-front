@@ -7,7 +7,7 @@ import { authClient } from "../lib/auth-client";
 
 export default function Home() {
   const handleInvit = async () => {
-    const { data, error } = await authClient.signIn.email({
+    const { error } = await authClient.signIn.email({
       email: "hugo@example.com",
       password: "mdpInvit",
     });
