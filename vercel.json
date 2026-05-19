@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://ton-back.vercel.app/api/:path*"
+      "destination": "https://learnwithme-front.vercel.app/api/:path*"
     }
   ]
 }
