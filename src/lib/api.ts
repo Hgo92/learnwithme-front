@@ -1,6 +1,6 @@
 import type { Card, Deck } from "../lib/interfaces";
 
-const apiURL = "http://localhost:3000";
+const apiURL = "https://learn-with-me-nest.vercel.app";
 
 export const api = {
   getDecks: async (): Promise<Deck[]> => {
