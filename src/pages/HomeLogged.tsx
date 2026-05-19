@@ -1,8 +1,10 @@
 import { Link } from "react-router";
+import Navbar from "../components/Navbar";
 
 export default function HomeLogged() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-8 text-center px-6 bg-cream">
+      <Navbar />
       <div className="w-10 h-0.5 bg-indigo-deep rounded-full" />
 
       <div className="flex flex-col gap-4 max-w-md">

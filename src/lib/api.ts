@@ -59,4 +59,20 @@ export const api = {
     if (!res.ok) throw new Error("Erreur lors de la modification du deck");
     return res.json();
   },
+
+  updateCard: async (
+    newCard: Pick<Card, "title" | "translation" | "deckId">,
+    id: number,
+  ): Promise<Card> => {
+    const res = await fetch(`${apiURL}/cards/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(newCard),
+    });
+    if (!res.ok) throw new Error("Erreur lors de la modification de la carte");
+    return res.json();
+  },
 };

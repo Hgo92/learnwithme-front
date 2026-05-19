@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Card, Deck } from "../lib/interfaces";
-import { api } from "../lib/api";
+
 import ChangeDeck from "./modules/ChangeDeck";
 import DeleteDeck from "./DeleteDeck";
 import Carte from "./Carte";
@@ -55,7 +55,7 @@ export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
       {/* Cards area */}
       <div className="px-6 py-4">
         {cartesDeck.length > 0 ? (
-          <Carte dataCartes={cartesDeck} onReloadCartes={onReload} />
+          <Carte deckId={deck.id} dataCartes={cartesDeck} onReload={onReload} />
         ) : (
           <p className="text-sm text-ink-muted italic py-2">
             Aucune carte dans ce deck.
