@@ -4,6 +4,7 @@ import { api } from "../lib/api";
 import ChangeDeck from "./modules/ChangeDeck";
 import DeleteDeck from "./DeleteDeck";
 import Carte from "./Carte";
+import AddCard from "./modules/AddCard";
 
 export interface MesDecksProps {
   onReload: () => void;
@@ -13,27 +14,10 @@ export interface MesDecksProps {
 
 export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
   const [isEditing, setIsEditing] = useState(false);
-  const [addingCarteDeckId, setAddingCarteDeckId] = useState<number | null>(
-    null,
-  );
-
-  const [mot, setMot] = useState("");
-  const [trad, setTrad] = useState("");
-
-  const handleNewCarte = async (mot: string, trad: string, deck_id: number) => {
-    // await api.createCard({});
-    setAddingCarteDeckId(null);
-    setMot("");
-    setTrad("");
-    onReload();
-  };
+  const [isAddingCarte, setIsAddingCard] = useState(false);
 
   const cartesDeck = cards.filter((c) => c.deckId === deck.id);
 
-  const isAddingCarte = addingCarteDeckId === deck.id;
-
-  const inputClass =
-    "border-[1.5px] border-border rounded-lg px-3 py-2 text-sm bg-white text-ink placeholder-ink-muted focus:outline-none focus:border-[#6366f1] focus:ring-2 focus:ring-[#6366f1]/20";
   return (
     <div
       key={deck.id}
@@ -79,34 +63,14 @@ export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
         )}
 
         {isAddingCarte ? (
-          <div className="flex gap-3 items-center flex-wrap mt-3 p-4 bg-cream rounded-xl border-[1.5px] border-dashed border-border">
-            <input
-              onChange={(e) => setMot(e.target.value)}
-              placeholder="Le mot"
-              autoFocus
-              className={`${inputClass} flex-1 min-w-32`}
-            />
-            <input
-              onChange={(e) => setTrad(e.target.value)}
-              placeholder="Sa traduction"
-              className={`${inputClass} flex-1 min-w-32`}
-            />
-            <button
-              onClick={() => handleNewCarte(mot, trad, deck.id)}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-indigo-deep hover:bg-[#6366f1] transition-colors"
-            >
-              Ajouter
-            </button>
-            <button
-              onClick={() => setAddingCarteDeckId(null)}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-ink-muted border border-border bg-transparent hover:bg-cream-dark transition-colors"
-            >
-              Annuler
-            </button>
-          </div>
+          <AddCard
+            deckId={deck.id}
+            onReload={onReload}
+            setIsAddingCard={setIsAddingCard}
+          />
         ) : (
           <button
-            onClick={() => setAddingCarteDeckId(deck.id)}
+            onClick={() => setIsAddingCard(true)}
             className="mt-3 w-full py-2.5 rounded-xl text-sm text-indigo-deep border-[1.5px] border-dashed border-indigo-pale bg-transparent hover:bg-indigo-pale/40 transition-colors font-medium"
           >
             + Ajouter une carte

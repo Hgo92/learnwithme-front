@@ -9,31 +9,34 @@ export default function Decks() {
   const [isDecksLoading, setIsDecksLoading] = useState(true);
   const [cards, setCards] = useState<Card[]>([]);
 
-  useEffect(() => {
+  const fetchDecksAndCards = () => {
+    setIsDecksLoading(true);
     api
       .getDecks()
       .then(setDecks)
       .finally(() => setIsDecksLoading(false));
 
     api.getCards().then(setCards);
+  };
+
+  useEffect(() => {
+    fetchDecksAndCards();
   }, []);
 
-  function onReloadDecks() {
-    console.log("Coucou");
-  }
-
-  function onReloadCartes() {
-    console.log("Coucou");
+  function onReload() {
+    fetchDecksAndCards();
   }
 
   const [isVisible, setIsVisible] = useState(false);
   const [name, setName] = useState("");
 
   const newDeck = async (name: string) => {
-    api.createDeck({ title: name });
+    if (!name.trim()) return;
+
+    await api.createDeck({ title: name });
     setName("");
     setIsVisible(false);
-    onReloadDecks();
+    onReload();
   };
 
   return (
@@ -80,12 +83,29 @@ export default function Decks() {
           </div>
         </div>
 
-        <MesDecks
-          decks={decks}
-          cards={cards}
-          onReloadCartes={onReloadCartes}
-          onReloadDecks={onReloadDecks}
-        />
+        {isDecksLoading && (
+          <div className="flex flex-col gap-4 max-w-md">
+            <p className="text-ink-muted text-lg font-light leading-relaxed">
+              En cours de chargement
+            </p>
+          </div>
+        )}
+
+        {decks?.length === 0 && (
+          <div className="flex flex-col gap-4 max-w-md">
+            <p className="text-ink-muted text-lg font-light leading-relaxed">
+              Vous n'avez pas de decks pour l'instant !
+            </p>
+          </div>
+        )}
+
+        <div className="flex flex-col gap-6">
+          {decks
+            .sort((a, b) => a.id - b.id)
+            .map((deck) => {
+              return <MesDecks deck={deck} cards={cards} onReload={onReload} />;
+            })}
+        </div>
       </div>
     </main>
   );

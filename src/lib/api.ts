@@ -32,7 +32,9 @@ export const api = {
     return res.json();
   },
 
-  createCard: async (newCard: Omit<Card, "id">): Promise<Card> => {
+  createCard: async (
+    newCard: Pick<Card, "title" | "translation" | "deckId">,
+  ): Promise<Card> => {
     const res = await fetch(`${apiURL}/cards`, {
       method: "POST",
       headers: {
@@ -42,6 +44,19 @@ export const api = {
       body: JSON.stringify(newCard),
     });
     if (!res.ok) throw new Error("Erreur lors de la création de la carte");
+    return res.json();
+  },
+
+  updateDeck: async (title: string, id: number): Promise<Deck> => {
+    const res = await fetch(`${apiURL}/decks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ title: title }),
+    });
+    if (!res.ok) throw new Error("Erreur lors de la modification du deck");
     return res.json();
   },
 };
