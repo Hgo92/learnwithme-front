@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 import LoginModal from "../components/authentication/LoginModal";
 import RegisterModal from "../components/authentication/RegisterModal";
 
 import { authClient } from "../lib/auth-client";
 
 export default function Home() {
+  const navigate = useNavigate();
   const handleInvit = async () => {
     const { error } = await authClient.signIn.email({
       email: "hugo@example.com",
@@ -16,7 +17,7 @@ export default function Home() {
       return;
     }
 
-    <Navigate to="/home" />;
+    navigate("/home");
   };
 
   const [loginModal, setLoginModal] = useState(false);
@@ -45,7 +46,7 @@ export default function Home() {
         ) : (
           <button
             onClick={() => setLoginModal(true)}
-            className="px-6 py-3 rounded-xl text-sm font-medium text-inkborder-[1.5px] border-border bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 shadow-sm"
+            className="px-6 py-3 rounded-xl text-sm font-medium text-ink border-[1.5px] border-border bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 shadow-sm"
           >
             Me connecter
           </button>
@@ -55,14 +56,14 @@ export default function Home() {
         ) : (
           <button
             onClick={() => setRegisterModal(true)}
-            className="px-6 py-3 rounded-xl text-sm font-medium text-inkborder-[1.5px] border-border bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 shadow-sm"
+            className="px-6 py-3 rounded-xl text-sm font-medium text-ink border-[1.5px] border-border bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 shadow-sm"
           >
             M'inscrire
           </button>
         )}
         <button
           onClick={() => handleInvit()}
-          className="px-6 py-3 rounded-xl text-sm font-medium text-inkborder-[1.5px] border-border bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 shadow-sm"
+          className="px-6 py-3 rounded-xl text-sm font-medium text-ink border-[1.5px] border-border bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 shadow-sm"
         >
           Tester comme invité
         </button>
