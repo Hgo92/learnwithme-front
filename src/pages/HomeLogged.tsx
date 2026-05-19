@@ -34,13 +34,6 @@ export default function HomeLogged() {
           Commencer à jouer
         </Link>
       </div>
-
-      <div className="flex gap-1.5 mt-4 text-ink-muted">
-        <p>
-          Réalisé par Hugo Monier avec JavaScript (TypeScript - React -
-          TailwindCSS) et Express
-        </p>
-      </div>
     </main>
   );
 }
