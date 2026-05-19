@@ -6,13 +6,16 @@ import Play from "./pages/Play";
 
 import "./App.css";
 import { RouteProtection } from "./components/authentication/RouteProtection";
+import { HomeProtection } from "./components/authentication/HomeProtection";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route element={<HomeProtection />}>
+            <Route path="/" element={<Home />} />
+          </Route>
           <Route element={<RouteProtection />}>
             <Route path="/home" element={<HomeLogged />} />
             <Route path="/decks" element={<Decks />} />
