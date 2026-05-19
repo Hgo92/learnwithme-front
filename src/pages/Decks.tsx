@@ -31,7 +31,7 @@ export default function Decks() {
   const [name, setName] = useState("");
 
   const newDeck = async (name: string) => {
-    await addDeck(name);
+    api.createDeck(name);
     setName("");
     setIsVisible(false);
     onReloadDecks();
