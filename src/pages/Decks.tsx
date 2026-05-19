@@ -1,7 +1,6 @@
 import MesDecks from "../components/MesDecks";
 import type { Card, Deck } from "../lib/interfaces";
 import { useEffect, useState } from "react";
-import { addDeck } from "../components/modules/AddModule";
 import Navbar from "../components/Navbar";
 import { api } from "../lib/api";
 
@@ -31,7 +30,7 @@ export default function Decks() {
   const [name, setName] = useState("");
 
   const newDeck = async (name: string) => {
-    api.createDeck(name);
+    api.createDeck({ title: name });
     setName("");
     setIsVisible(false);
     onReloadDecks();

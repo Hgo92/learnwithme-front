@@ -19,7 +19,7 @@ export const api = {
     return res.json();
   },
 
-  createDeck: async (newDeck: string): Promise<Deck> => {
+  createDeck: async (newDeck: Pick<Deck, "title">): Promise<Deck> => {
     const res = await fetch(`${apiURL}/decks`, {
       method: "POST",
       headers: {
