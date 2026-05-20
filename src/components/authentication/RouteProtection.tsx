@@ -3,8 +3,8 @@ import { authClient } from "../../lib/auth-client";
 
 export function RouteProtection(): React.ReactElement {
   const { data: session, isPending } = authClient.useSession();
-  if (isPending) return <div>Chargement en cours</div>;
-  if (!session) {
+
+  if (!session && !isPending) {
     return <Navigate to="/" />;
   }
 

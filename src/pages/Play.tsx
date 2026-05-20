@@ -21,8 +21,10 @@ export default function Play() {
   const [deckId, setDeckId] = useState<number | null>(null);
 
   useEffect(() => {
-    api.getDecks().then(setDecks);
-    api.getCards().then(setCards);
+    Promise.all([api.getDecks(), api.getCards()]).then(([decks, cards]) => {
+      setDecks(decks);
+      setCards(cards);
+    });
 
     if (decks.length > 0) {
       setDeckId(decks[0].id);
