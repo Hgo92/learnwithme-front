@@ -19,26 +19,30 @@ export default function Play() {
   const [cards, setCards] = useState<Card[]>([]);
   const [selectCards, setSelectCards] = useState<Card[]>([]);
   const [deckId, setDeckId] = useState<number | null>(null);
+  const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {
-    Promise.all([api.getDecks(), api.getCards()]).then(([decks, cards]) => {
-      setDecks(decks);
-      setCards(cards);
-    });
+    Promise.all([api.getDecks(), api.getCards()]).then(
+      ([fetchedDecks, fetchedCards]) => {
+        setDecks(fetchedDecks);
+        setCards(fetchedCards);
 
-    if (decks.length > 0) {
-      setDeckId(decks[0].id);
-    }
+        if (fetchedDecks.length > 0) {
+          const firstDeckId = fetchedDecks[0].id;
+          setDeckId(firstDeckId);
+          setSelectCards(fetchedCards.filter((c) => c.deckId === firstDeckId));
+        }
+      },
+    );
   }, []);
-
-  const [isStarted, setIsStarted] = useState(false);
 
   const handleSelect = (
     e: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>,
   ) => {
     const newId = parseInt(e.target.value);
     setDeckId(newId);
-    setSelectCards(cards.filter((c) => c.deckId === deckId));
+    const filteredCards = cards.filter((c) => c.deckId === newId);
+    setSelectCards(filteredCards);
   };
 
   return (
@@ -56,11 +60,10 @@ export default function Play() {
             </p>
           </div>
           <select
-            defaultValue="99"
             onChange={(e) => handleSelect(e)}
             className="border-[1.5px] border-border rounded-lg px-3 py-2 text-sm bg-white text-ink focus:outline-none focus:border-[#6366f1] focus:ring-2 focus:ring-[#6366f1]/20"
           >
-            <option value="99" disabled>
+            <option value="" selected disabled>
               Choisissez un deck
             </option>
             {decks.map((deck) => (
