@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Delete from "./DeleteCarte";
+import Delete from "./modules/DeleteCarte";
 
 import type { Card } from "../lib/interfaces";
 import ChangeCard from "./modules/ChangeCard";

@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Card, Deck } from "../lib/interfaces";
 
 import ChangeDeck from "./modules/ChangeDeck";
-import DeleteDeck from "./DeleteDeck";
+import DeleteDeck from "./modules/DeleteDeck";
 import Carte from "./Carte";
 import AddCard from "./modules/AddCard";
 
