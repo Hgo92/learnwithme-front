@@ -1,6 +1,6 @@
 import type { Card, Deck } from "../lib/interfaces";
 
-const apiURL = "https://learn-with-me-nest.vercel.app";
+const apiURL = "/api";
 
 export const api = {
   getDecks: async (): Promise<Deck[]> => {
@@ -77,7 +77,7 @@ export const api = {
   },
 
   deleteCard: async (id: number): Promise<void> => {
-    const res = await fetch(`${apiURL}/cards/${id}`, {
+    const res = await fetch(`${apiURL}//cards/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
