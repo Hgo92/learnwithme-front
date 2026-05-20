@@ -10,9 +10,15 @@ export interface MesDecksProps {
   onReload: () => void;
   deck: Deck;
   cards: Card[];
+  index: number;
 }
 
-export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
+export default function MesDecks({
+  deck,
+  cards,
+  onReload,
+  index,
+}: MesDecksProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingCarte, setIsAddingCard] = useState(false);
 
@@ -20,7 +26,7 @@ export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
 
   return (
     <div
-      key={deck.id}
+      key={index}
       className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden"
     >
       {/* Deck header */}
