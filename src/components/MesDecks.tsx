@@ -48,7 +48,7 @@ export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
           >
             ✏️
           </button>
-          <DeleteDeck id={deck.id} onReloadDecks={onReload} />
+          <DeleteDeck id={deck.id} onReload={onReload} />
         </div>
       </div>
 

@@ -86,4 +86,15 @@ export const api = {
     });
     if (!res.ok) throw new Error("Erreur lors de la suppression de la carte");
   },
+
+  deleteDeck: async (id: number): Promise<void> => {
+    const res = await fetch(`${apiURL}/decks/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    if (!res.ok) throw new Error("Erreur lors de la suppression du deck");
+  },
 };
