@@ -75,4 +75,15 @@ export const api = {
     if (!res.ok) throw new Error("Erreur lors de la modification de la carte");
     return res.json();
   },
+
+  deleteCard: async (id: number): Promise<void> => {
+    const res = await fetch(`${apiURL}/cards/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    if (!res.ok) throw new Error("Erreur lors de la suppression de la carte");
+  },
 };

@@ -23,7 +23,7 @@ export default function CarteItem({ deckId, card, onReload }: CarteItemProps) {
         >
           ✏️
         </button>
-        <Delete onReloadCartes={onReload} id={card.id} />
+        <Delete onReload={onReload} id={card.id} />
       </div>
 
       {isEditing ? (
