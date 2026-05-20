@@ -6,7 +6,6 @@
 //  - Heuristique
 // - Check distance LEvenshtein
 // - Intégration IA (aisdk => recherche express)
-// - Table user ID/Name
 
 import type { Deck, Card } from "../lib/interfaces";
 import Navbar from "../components/Navbar";
@@ -18,7 +17,6 @@ export default function Play() {
   const [decks, setDecks] = useState<Deck[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
   const [selectCards, setSelectCards] = useState<Card[]>([]);
-  const [deckId, setDeckId] = useState<number | null>(null);
   const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {
@@ -29,7 +27,6 @@ export default function Play() {
 
         if (fetchedDecks.length > 0) {
           const firstDeckId = fetchedDecks[0].id;
-          setDeckId(firstDeckId);
           setSelectCards(fetchedCards.filter((c) => c.deckId === firstDeckId));
         }
       },
@@ -40,7 +37,6 @@ export default function Play() {
     e: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>,
   ) => {
     const newId = parseInt(e.target.value);
-    setDeckId(newId);
     const filteredCards = cards.filter((c) => c.deckId === newId);
     setSelectCards(filteredCards);
   };
