@@ -7,6 +7,7 @@ import Play from "./pages/Play";
 import "./App.css";
 import { RouteProtection } from "./components/authentication/RouteProtection";
 import { HomeProtection } from "./components/authentication/HomeProtection";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

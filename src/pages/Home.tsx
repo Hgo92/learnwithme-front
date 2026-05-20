@@ -68,13 +68,6 @@ export default function Home() {
           Tester comme invité
         </button>
       </div>
-
-      <div className="flex gap-1.5 mt-4 text-ink-muted">
-        <p>
-          Réalisé par Hugo Monier avec JavaScript (TypeScript - React -
-          TailwindCSS) et NestJS (TypeORM - Better Auth)
-        </p>
-      </div>
     </main>
   );
 }
