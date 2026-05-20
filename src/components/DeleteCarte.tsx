@@ -18,10 +18,10 @@ export default function Delete({ id, onReload }: DeleteProps) {
   return (
     <div>
       {isOpen ? (
-        <div className="absolute inset-0 bg-cream/95 backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center gap-3 p-4 z-10">
-          <p className="text-sm text-ink font-medium text-center">
+        <div className="absolute bg-white border border-border backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center gap-3 p-4 z-10">
+          <span className="text-sm text-ink font-medium text-center">
             Supprimer cette carte ?
-          </p>
+          </span>
           <div className="flex gap-2">
             <button
               onClick={() => handleDeleteCarte(id)}
