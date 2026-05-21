@@ -3,6 +3,7 @@ import type { Card, Deck } from "../lib/interfaces";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { api } from "../lib/api";
+import AddDeck from "../components/modules/AddDeck";
 
 export default function Decks() {
   const [decks, setDecks] = useState<Deck[]>([]);
@@ -28,16 +29,6 @@ export default function Decks() {
   }
 
   const [isVisible, setIsVisible] = useState(false);
-  const [name, setName] = useState("");
-
-  const newDeck = async (name: string) => {
-    if (!name.trim()) return;
-
-    await api.createDeck({ title: name });
-    setName("");
-    setIsVisible(false);
-    onReload();
-  };
 
   return (
     <main className="pt-20 bg-cream min-h-screen">
@@ -53,22 +44,7 @@ export default function Decks() {
 
           <div className="flex gap-3 items-center flex-wrap">
             {isVisible && (
-              <div className="flex gap-2 items-center">
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && newDeck(name)}
-                  placeholder="Nom du deck"
-                  autoFocus
-                  className="border-[1.5px] border-border rounded-lg px-3 py-2 text-sm bg-white text-ink placeholder-ink-muted focus:outline-none focus:border-[#6366f1] focus:ring-2 focus:ring-[#6366f1]/20 w-48"
-                />
-                <button
-                  onClick={() => newDeck(name)}
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-indigo-deep hover:bg-[#6366f1] transition-colors"
-                >
-                  Valider
-                </button>
-              </div>
+              <AddDeck setIsVisible={setIsVisible} onReload={onReload} />
             )}
             <button
               onClick={() => setIsVisible(!isVisible)}
