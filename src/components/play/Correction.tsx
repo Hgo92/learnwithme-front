@@ -1,42 +1,50 @@
 import type { Card } from "../../lib/interfaces";
 
 interface CorrectionProps {
+  isAnswerGood: boolean;
   currentCard: Card;
   answer: string;
-  handleFail: () => void;
-  handleSuccess: () => void;
+  handleNext: () => void;
+  handleBanWord: () => void;
 }
 
 export default function Correction({
+  isAnswerGood,
   currentCard,
   answer,
-  handleFail,
-  handleSuccess,
+  handleNext,
+  handleBanWord,
 }: CorrectionProps) {
   return (
     <div className="flex flex-col gap-4">
-      <div className="bg-cream rounded-xl border border-border px-5 py-3">
+      <div
+        className={
+          isAnswerGood
+            ? "bg-green-400 rounded-xl border border-border px-5 py-3"
+            : "bg-red-700 rounded-xl border border-border px-5 py-3"
+        }
+      >
         <p className="text-clear-warm italic font-serif text-xl m-0">
           {currentCard.translation}
         </p>
         {answer && (
-          <p className="text-xs text-ink-muted mt-1.5">
+          <p className="text-xs text-ink-soft mt-1.5">
             Votre réponse : <em>{answer}</em>
           </p>
         )}
       </div>
       <div className="flex gap-3">
         <button
-          onClick={handleFail}
-          className="flex-1 py-2.5 rounded-xl text-sm font-medium text-white bg-red-deep hover:opacity-90 transition-opacity"
+          onClick={handleBanWord}
+          className="flex-1 py-2.5 rounded-xl text-sm font-medium text-black bg-cream hover:opacity-90 transition-opacity p-2"
         >
-          ✗ Raté
+          Je ne veux plus voir ce mot
         </button>
         <button
-          onClick={handleSuccess}
-          className="flex-1 py-2.5 rounded-xl text-sm font-medium text-white bg-green-deep hover:opacity-90 transition-opacity"
+          onClick={handleNext}
+          className="flex-1 py-2.5 rounded-xl text-sm font-medium text-black bg-cream hover:opacity-90 transition-opacity"
         >
-          ✓ Réussi
+          Question suivante
         </button>
       </div>
     </div>
