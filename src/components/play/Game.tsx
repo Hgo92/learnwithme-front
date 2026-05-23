@@ -53,7 +53,7 @@ export default function Game({ cards, setIsStarted }: GameProps) {
   };
 
   const handleBanWord = async (id: number) => {
-    await api.archivedCard(id);
+    await api.archiveCard(id);
     isAnswerGood ? handleSuccess() : handleFail();
   };
 
