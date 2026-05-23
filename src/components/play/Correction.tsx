@@ -5,7 +5,7 @@ interface CorrectionProps {
   currentCard: Card;
   answer: string;
   handleNext: () => void;
-  handleBanWord: () => void;
+  handleBanWord: (id: number) => Promise<void>;
 }
 
 export default function Correction({
@@ -35,7 +35,7 @@ export default function Correction({
       </div>
       <div className="flex gap-3">
         <button
-          onClick={handleBanWord}
+          onClick={() => handleBanWord(currentCard.id)}
           className="flex-1 py-2.5 rounded-xl text-sm font-medium text-black bg-cream hover:opacity-90 transition-opacity p-2"
         >
           Je ne veux plus voir ce mot

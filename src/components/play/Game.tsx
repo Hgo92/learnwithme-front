@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Card } from "../../lib/interfaces";
 import Correction from "./Correction";
 import Answer from "./Answer";
+import { api } from "../../lib/api";
 
 interface GameProps {
   cards: Card[];
@@ -51,9 +52,9 @@ export default function Game({ cards, setIsStarted }: GameProps) {
     isAnswerGood ? handleSuccess() : handleFail();
   };
 
-  const handleBanWord = () => {
+  const handleBanWord = async (id: number) => {
+    await api.archivedCard(id);
     isAnswerGood ? handleSuccess() : handleFail();
-    // Rajouter la gestion du retrait du mot une fois la DB/back modifié
   };
 
   const currentCard = cartesRestantes[randomIndex];

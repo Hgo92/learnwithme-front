@@ -97,4 +97,15 @@ export const api = {
     });
     if (!res.ok) throw new Error("Erreur lors de la suppression du deck");
   },
+
+  archivedCard: async (id: number): Promise<void> => {
+    const res = await fetch(`${apiURL}/cards/${id}/archived`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    if (!res.ok) throw new Error("Erreur lors de l'archivage de la carte");
+  },
 };
