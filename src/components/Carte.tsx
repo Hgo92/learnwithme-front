@@ -10,14 +10,19 @@ export interface CartesProps {
 export default function Carte({ deckId, dataCartes, onReload }: CartesProps) {
   return (
     <div className="flex flex-row flex-wrap gap-3 py-1">
-      {dataCartes.map((card) => (
-        <CarteItem
-          key={card.id}
-          deckId={deckId}
-          card={card}
-          onReload={onReload}
-        />
-      ))}
+      {dataCartes
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        )
+        .map((card) => (
+          <CarteItem
+            key={card.id}
+            deckId={deckId}
+            card={card}
+            onReload={onReload}
+          />
+        ))}
     </div>
   );
 }
