@@ -37,6 +37,9 @@ export default function ChangeCard({
     onReload();
     setIsEditing(false);
     enqueueSnackbar("Carte modifiée !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 4000);
   };
 
   const inputClass =

@@ -16,6 +16,9 @@ export default function DeleteDeck({ id, onReload }: DeleteDeckProps) {
     onReload();
     setIsOpen(true);
     enqueueSnackbar("Deck supprimé !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 4000);
   };
 
   return (

@@ -24,6 +24,9 @@ export default function AddCard({
     onReload();
     setIsAddingCard(false);
     enqueueSnackbar("Carte ajoutée !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 4000);
   };
 
   const inputClass =

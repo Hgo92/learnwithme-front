@@ -16,6 +16,9 @@ export default function Delete({ id, onReload }: DeleteProps) {
     onReload();
     setIsOpen(false);
     enqueueSnackbar("Carte supprimée !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 4000);
   };
 
   return (

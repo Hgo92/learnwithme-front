@@ -23,6 +23,9 @@ export default function LoginModal({ closeModal }: { closeModal: () => void }) {
     } catch {
       setError("🥺 Il y a eu un problème, désolé !");
       enqueueSnackbar("Erreur lors de la connexion ! 🥺");
+      setTimeout(() => {
+        closeSnackbar();
+      }, 4000);
     }
   }
 

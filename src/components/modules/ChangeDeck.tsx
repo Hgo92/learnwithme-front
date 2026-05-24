@@ -23,6 +23,9 @@ export default function ChangeDeck({
     onReload();
     setIsEditing(false);
     enqueueSnackbar("Deck modifié !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 4000);
   };
 
   const inputClass =

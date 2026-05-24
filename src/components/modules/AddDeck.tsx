@@ -19,6 +19,9 @@ export default function AddDeck({ setIsVisible, onReload }: AddProps) {
     setIsVisible(false);
     onReload();
     enqueueSnackbar("Deck créé !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 4000);
   };
   return (
     <div className="flex gap-2 items-center">
