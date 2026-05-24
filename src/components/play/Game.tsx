@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Card } from "../../lib/interfaces";
 import Correction from "./Correction";
 import Answer from "./Answer";
+import { api } from "../../lib/api";
 
 interface GameProps {
   cards: Card[];
@@ -16,6 +17,7 @@ export default function Game({ cards, setIsStarted }: GameProps) {
   const [score, setScore] = useState(0);
   const [cartesJouees, setCartesJouees] = useState(0);
   const [lastResult, setLastResult] = useState<"success" | "fail" | null>(null);
+  const [isAnswerGood, setIsAnswerGood] = useState(false);
 
   const nextCard = (cartesRestantes: Card[]) => {
     setRandomIndex(Math.floor(Math.random() * cartesRestantes.length));
@@ -31,7 +33,6 @@ export default function Game({ cards, setIsStarted }: GameProps) {
     setRandomIndex(0);
     setLastResult(null);
   };
-
   const handleSuccess = () => {
     setCartesJouees((j) => j + 1);
     setLastResult("success");
@@ -45,6 +46,15 @@ export default function Game({ cards, setIsStarted }: GameProps) {
     setCartesJouees((j) => j + 1);
     setLastResult("fail");
     nextCard(cartesRestantes);
+  };
+
+  const handleNext = () => {
+    isAnswerGood ? handleSuccess() : handleFail();
+  };
+
+  const handleBanWord = async (id: number) => {
+    await api.archiveCard(id);
+    isAnswerGood ? handleSuccess() : handleFail();
   };
 
   const currentCard = cartesRestantes[randomIndex];
@@ -83,13 +93,16 @@ export default function Game({ cards, setIsStarted }: GameProps) {
 
         {isWordVisible ? (
           <Correction
+            isAnswerGood={isAnswerGood}
             currentCard={currentCard}
             answer={answer}
-            handleFail={handleFail}
-            handleSuccess={handleSuccess}
+            handleNext={handleNext}
+            handleBanWord={handleBanWord}
           />
         ) : (
           <Answer
+            setIsAnswerGood={setIsAnswerGood}
+            currentCard={currentCard}
             answer={answer}
             setAnswer={setAnswer}
             setIsWordVisible={setIsWordVisible}

@@ -10,25 +10,16 @@ export interface MesDecksProps {
   onReload: () => void;
   deck: Deck;
   cards: Card[];
-  index: number;
 }
 
-export default function MesDecks({
-  deck,
-  cards,
-  onReload,
-  index,
-}: MesDecksProps) {
+export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingCarte, setIsAddingCard] = useState(false);
 
   const cartesDeck = cards.filter((c) => c.deckId === deck.id);
 
   return (
-    <div
-      key={index}
-      className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden"
-    >
+    <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
       {/* Deck header */}
       <div className="flex items-center gap-3 px-6 py-4 bg-cream border-b border-cream-dark">
         <div className="w-2.5 h-2.5 rounded-full bg-indigo-deep shrink-0" />

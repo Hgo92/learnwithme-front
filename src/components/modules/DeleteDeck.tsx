@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { api } from "../../lib/api";
+import { useSnackbar } from "notistack";
 
 interface DeleteDeckProps {
   id: number;
@@ -8,11 +9,16 @@ interface DeleteDeckProps {
 
 export default function DeleteDeck({ id, onReload }: DeleteDeckProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleDeleteDeck = async (id: number) => {
     await api.deleteDeck(id);
     onReload();
     setIsOpen(true);
+    enqueueSnackbar("Deck supprimé !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 4000);
   };
 
   return (

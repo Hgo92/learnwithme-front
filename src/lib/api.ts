@@ -97,4 +97,26 @@ export const api = {
     });
     if (!res.ok) throw new Error("Erreur lors de la suppression du deck");
   },
+
+  archiveCard: async (id: number): Promise<void> => {
+    const res = await fetch(`${apiURL}/cards/${id}/archive`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    if (!res.ok) throw new Error("Erreur lors de l'archivage de la carte");
+  },
+
+  activateCard: async (id: number): Promise<void> => {
+    const res = await fetch(`${apiURL}/cards/${id}/activate`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    if (!res.ok) throw new Error("Erreur lors de l'activation de la carte");
+  },
 };

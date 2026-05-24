@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import LoginModal from "../components/authentication/LoginModal";
 import RegisterModal from "../components/authentication/RegisterModal";
+import { useSnackbar } from "notistack";
 
 import { authClient } from "../lib/auth-client";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const handleInvit = async () => {
     const { error } = await authClient.signIn.email({
       email: "hugo@example.com",
@@ -16,12 +19,20 @@ export default function Home() {
       console.error("Erreur de connexion :", error.message);
       return;
     }
-
+    enqueueSnackbar("Connexion réussie en tant qu'invité(e) !");
     navigate("/home");
   };
 
   const [loginModal, setLoginModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
+
+  const handleRegister = () => {
+    setRegisterModal(false);
+    enqueueSnackbar("Inscription réussie, bienvenue sur Learn With Me !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 5000);
+  };
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-8 text-center px-6 bg-cream">
@@ -52,7 +63,10 @@ export default function Home() {
           </button>
         )}
         {registerModal ? (
-          <RegisterModal closeModal={() => setRegisterModal(false)} />
+          <RegisterModal
+            closeModal={() => handleRegister()}
+            cancelModal={() => setRegisterModal(false)}
+          />
         ) : (
           <button
             onClick={() => setRegisterModal(true)}

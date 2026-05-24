@@ -78,13 +78,13 @@ export default function Decks() {
         <div className="flex flex-col gap-6">
           {decks
             .sort((a, b) => a.id - b.id)
-            .map((deck, index) => {
+            .map((deck) => {
               return (
                 <MesDecks
+                  key={deck.id}
                   deck={deck}
                   cards={cards}
                   onReload={onReload}
-                  index={index}
                 />
               );
             })}

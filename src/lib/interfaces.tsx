@@ -11,6 +11,9 @@ export type Card = {
   id: number;
   title: string;
   translation: string;
+  isArchived: boolean;
   deckId: number;
   userId: string;
+  updatedAt: Date;
+  createdAt: Date;
 };
