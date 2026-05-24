@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { api } from "../../lib/api";
+import { useSnackbar } from "notistack";
 
 interface AddProps {
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,6 +9,7 @@ interface AddProps {
 
 export default function AddDeck({ setIsVisible, onReload }: AddProps) {
   const [name, setName] = useState("");
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const newDeck = async (name: string) => {
     if (!name.trim()) return;
@@ -16,6 +18,7 @@ export default function AddDeck({ setIsVisible, onReload }: AddProps) {
     setName("");
     setIsVisible(false);
     onReload();
+    enqueueSnackbar("Deck créé !");
   };
   return (
     <div className="flex gap-2 items-center">

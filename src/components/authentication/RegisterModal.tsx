@@ -2,11 +2,14 @@ import { useState } from "react";
 import { authClient } from "../../lib/auth-client";
 
 export default function RegisterModal({
+  cancelModal,
   closeModal,
 }: {
+  cancelModal: () => void;
   closeModal: () => void;
 }) {
   const [error, setError] = useState<string | null>(null);
+
   async function handleRegister(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
@@ -16,13 +19,15 @@ export default function RegisterModal({
       .value;
 
     try {
-      await authClient.signUp.email({
-        name: name,
-        email: email,
-        password: password,
-      });
-
-      closeModal;
+      await authClient.signUp
+        .email({
+          name: name,
+          email: email,
+          password: password,
+        })
+        .then(() => {
+          closeModal();
+        });
     } catch {
       setError("🥺 Il y a eu un problème, désolé !");
     }
@@ -95,7 +100,7 @@ export default function RegisterModal({
           <div className="flex gap-2 pt-1">
             <button
               type="button"
-              onClick={closeModal}
+              onClick={cancelModal}
               className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-ink-muted border border-border bg-white hover:bg-cream-dark transition-all duration-200"
             >
               Annuler

@@ -8,23 +8,26 @@ import "./App.css";
 import { RouteProtection } from "./components/authentication/RouteProtection";
 import { HomeProtection } from "./components/authentication/HomeProtection";
 import Footer from "./components/Footer";
+import { SnackbarProvider } from "notistack";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<HomeProtection />}>
-            <Route path="/" element={<Home />} />
-          </Route>
-          <Route element={<RouteProtection />}>
-            <Route path="/home" element={<HomeLogged />} />
-            <Route path="/decks" element={<Decks />} />
-            <Route path="/play" element={<Play />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      <Footer />
+      <SnackbarProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<HomeProtection />}>
+              <Route path="/" element={<Home />} />
+            </Route>
+            <Route element={<RouteProtection />}>
+              <Route path="/home" element={<HomeLogged />} />
+              <Route path="/decks" element={<Decks />} />
+              <Route path="/play" element={<Play />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        <Footer />
+      </SnackbarProvider>
     </>
   );
 }

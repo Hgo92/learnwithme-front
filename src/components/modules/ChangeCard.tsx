@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { api } from "../../lib/api";
 import type { Card } from "../../lib/interfaces";
+import { useSnackbar } from "notistack";
 
 interface ChangeCardProps {
   card: Card;
@@ -18,6 +19,7 @@ export default function ChangeCard({
   const [newMot, setNewMot] = useState(card.title);
   const [newTrad, setNewTrad] = useState(card.translation);
   const [archived, setArchived] = useState(card.isArchived);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleValidateChange = async (
     mot: string,
@@ -34,6 +36,7 @@ export default function ChangeCard({
     api.updateCard(newCard, id);
     onReload();
     setIsEditing(false);
+    enqueueSnackbar("Carte modifiée !");
   };
 
   const inputClass =
