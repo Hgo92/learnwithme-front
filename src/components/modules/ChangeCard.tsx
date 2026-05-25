@@ -61,7 +61,7 @@ export default function ChangeCard({
         <label>Carte archivée ?</label>
         <input
           type="checkbox"
-          checked={card.isArchived}
+          checked={archived}
           onChange={() => setArchived(!archived)}
         />
       </div>
