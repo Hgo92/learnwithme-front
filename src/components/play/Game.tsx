@@ -18,6 +18,7 @@ export default function Game({ cards, setIsStarted }: GameProps) {
   const [cartesJouees, setCartesJouees] = useState(0);
   const [lastResult, setLastResult] = useState<"success" | "fail" | null>(null);
   const [isAnswerGood, setIsAnswerGood] = useState(false);
+  const [bannedCards, setBannedCards] = useState<Set<number>>(new Set());
 
   const nextCard = (cartesRestantes: Card[]) => {
     setRandomIndex(Math.floor(Math.random() * cartesRestantes.length));
@@ -27,7 +28,10 @@ export default function Game({ cards, setIsStarted }: GameProps) {
   };
 
   const handleStart = () => {
-    setCartesRestantes(cards);
+    const newCards = cards.filter(
+      (c) => !c.isArchived && !bannedCards.has(c.id),
+    );
+    setCartesRestantes(newCards);
     setScore(0);
     setCartesJouees(0);
     setRandomIndex(0);
@@ -48,13 +52,22 @@ export default function Game({ cards, setIsStarted }: GameProps) {
     nextCard(cartesRestantes);
   };
 
+  const handleFailBan = () => {
+    setCartesJouees((j) => j + 1);
+    setLastResult("fail");
+    const newCards = cartesRestantes.filter((_, i) => i !== randomIndex);
+    setCartesRestantes(newCards);
+    nextCard(newCards);
+  };
+
   const handleNext = () => {
     isAnswerGood ? handleSuccess() : handleFail();
   };
 
   const handleBanWord = async (id: number) => {
     await api.archiveCard(id);
-    isAnswerGood ? handleSuccess() : handleFail();
+    setBannedCards((prev) => new Set(prev).add(id));
+    isAnswerGood ? handleSuccess() : handleFailBan();
   };
 
   const currentCard = cartesRestantes[randomIndex];

@@ -37,7 +37,9 @@ export default function Play() {
     e: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>,
   ) => {
     const newId = parseInt(e.target.value);
-    const filteredCards = cards.filter((c) => c.deckId === newId);
+    const filteredCards = cards.filter(
+      (c) => c.deckId === newId && !c.isArchived,
+    );
     setSelectCards(filteredCards);
   };
 
@@ -56,10 +58,11 @@ export default function Play() {
             </p>
           </div>
           <select
+            defaultValue="null"
             onChange={(e) => handleSelect(e)}
             className="border-[1.5px] border-border rounded-lg px-3 py-2 text-sm bg-white text-ink focus:outline-none focus:border-[#6366f1] focus:ring-2 focus:ring-[#6366f1]/20"
           >
-            <option value="" selected disabled>
+            <option value="null" disabled>
               Choisissez un deck
             </option>
             {decks.map((deck) => (
