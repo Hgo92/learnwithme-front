@@ -13,20 +13,22 @@ export default function LoginModal({ closeModal }: { closeModal: () => void }) {
     const password = (form.elements.namedItem("password") as HTMLInputElement)
       .value;
 
-    try {
-      await authClient.signIn.email({
-        email: email,
-        password: password,
-      });
-      enqueueSnackbar("Connexion réussie ! Bon retour sur Learn With Me !");
-      closeModal;
-    } catch {
-      setError("🥺 Il y a eu un problème, désolé !");
+    const { error: authError } = await authClient.signIn.email({
+      email,
+      password,
+    });
+
+    if (authError) {
+      setError("Il y a eu un problème, vérifiez vos identifiants !");
       enqueueSnackbar("Erreur lors de la connexion ! 🥺");
       setTimeout(() => {
         closeSnackbar();
       }, 4000);
+      return;
     }
+
+    (enqueueSnackbar("Connexion réussie ! Bon retour sur Learn With Me !"),
+      closeModal());
   }
 
   return (

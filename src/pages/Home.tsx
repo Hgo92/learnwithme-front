@@ -20,19 +20,14 @@ export default function Home() {
       return;
     }
     enqueueSnackbar("Connexion réussie en tant qu'invité(e) !");
+    setTimeout(() => {
+      closeSnackbar();
+    }, 4000);
     navigate("/home");
   };
 
   const [loginModal, setLoginModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
-
-  const handleRegister = () => {
-    setRegisterModal(false);
-    enqueueSnackbar("Inscription réussie, bienvenue sur Learn With Me !");
-    setTimeout(() => {
-      closeSnackbar();
-    }, 5000);
-  };
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-8 text-center px-6 bg-cream">
@@ -63,10 +58,7 @@ export default function Home() {
           </button>
         )}
         {registerModal ? (
-          <RegisterModal
-            closeModal={() => handleRegister()}
-            cancelModal={() => setRegisterModal(false)}
-          />
+          <RegisterModal closeModal={() => setRegisterModal(false)} />
         ) : (
           <button
             onClick={() => setRegisterModal(true)}
