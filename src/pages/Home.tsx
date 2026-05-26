@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import LoginModal from "../components/authentication/LoginModal";
 import RegisterModal from "../components/authentication/RegisterModal";
 import { useSnackbar } from "notistack";
-
 import { authClient } from "../lib/auth-client";
 
 export default function Home() {

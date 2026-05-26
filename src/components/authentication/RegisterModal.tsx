@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { authClient } from "../../lib/auth-client";
 import { useSnackbar } from "notistack";
+import { registerSchema } from "./zod-schema";
 
 export default function RegisterModal({
   closeModal,
@@ -18,20 +19,28 @@ export default function RegisterModal({
     const password = (form.elements.namedItem("password") as HTMLInputElement)
       .value;
 
-    const { error: authError } = await authClient.signUp.email({
+    const dataForm = registerSchema.safeParse({
       name: name,
       email: email,
       password: password,
     });
 
-    if (authError) {
-      setError("🥺 Il y a eu un problème, désolé !");
+    if (!dataForm.success) {
+      setError("Il y a eu un problème, vérifiez vos informations");
     }
-    enqueueSnackbar("Inscription réussie, bienvenue sur Learn With Me !");
-    setTimeout(() => {
-      closeSnackbar();
-    }, 5000);
-    closeModal();
+
+    if (dataForm.success) {
+      const { error: authError } = await authClient.signUp.email(dataForm.data);
+
+      if (authError) {
+        setError("🥺 Il y a eu un problème, désolé !");
+      }
+      enqueueSnackbar("Inscription réussie, bienvenue sur Learn With Me !");
+      setTimeout(() => {
+        closeSnackbar();
+      }, 5000);
+      closeModal();
+    }
   }
 
   return (
@@ -59,7 +68,7 @@ export default function RegisterModal({
             <input
               id="name"
               name="name"
-              placeholder="Votre pseudo"
+              placeholder="Votre pseudo (deux caractères)"
               required
               className="w-full px-4 py-2.5 rounded-xl border border-border bg-white text-ink text-sm placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-indigo-deep/30 focus:border-indigo-deep transition-all"
             />
@@ -92,7 +101,7 @@ export default function RegisterModal({
               name="password"
               required
               className="w-full px-4 py-2.5 rounded-xl border border-border bg-white text-ink text-sm placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-indigo-deep/30 focus:border-indigo-deep transition-all"
-              placeholder="••••••••"
+              placeholder="Au moins six caractères"
             />
           </div>
           {error && (
