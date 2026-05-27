@@ -3,7 +3,7 @@ import type { Card, Deck } from "../lib/interfaces";
 
 import ChangeDeck from "./modules/ChangeDeck";
 import DeleteDeck from "./modules/DeleteDeck";
-import Carte from "./Carte";
+import Carte from "../components/card/Carte";
 import AddCard from "./modules/AddCard";
 
 export interface MesDecksProps {

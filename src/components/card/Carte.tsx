@@ -1,4 +1,4 @@
-import type { Card } from "../lib/interfaces";
+import type { Card } from "../../lib/interfaces";
 import CarteItem from "./CarteItem";
 
 export interface CartesProps {
