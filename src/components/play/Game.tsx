@@ -16,7 +16,6 @@ export default function Game({ cards, setIsStarted }: GameProps) {
   const [cartesRestantes, setCartesRestantes] = useState<Card[]>(cards);
   const [score, setScore] = useState(0);
   const [cartesJouees, setCartesJouees] = useState(0);
-  const [lastResult, setLastResult] = useState<"success" | "fail" | null>(null);
   const [isAnswerGood, setIsAnswerGood] = useState(false);
   const [bannedCards, setBannedCards] = useState<Set<number>>(new Set());
 
@@ -25,7 +24,6 @@ export default function Game({ cards, setIsStarted }: GameProps) {
     setRandomIndex(Math.floor(Math.random() * cartesRestantes.length));
     setIsWordVisible(false);
     setAnswer("");
-    setLastResult(null);
   };
 
   // Fonction pour démarrer le jeu
@@ -37,13 +35,11 @@ export default function Game({ cards, setIsStarted }: GameProps) {
     setScore(0);
     setCartesJouees(0);
     setRandomIndex(0);
-    setLastResult(null);
   };
 
   // Fonction en cas de bonne réponse
   const handleSuccess = () => {
     setCartesJouees((j) => j + 1);
-    setLastResult("success");
     setScore((s) => s + 1);
     const newCartes = cartesRestantes.filter((_, i) => i !== randomIndex);
     setCartesRestantes(newCartes);
@@ -53,14 +49,12 @@ export default function Game({ cards, setIsStarted }: GameProps) {
   // Fonction en cas de mauvaise réponse
   const handleFail = () => {
     setCartesJouees((j) => j + 1);
-    setLastResult("fail");
     nextCard(cartesRestantes);
   };
 
   // Mauvaise réponse + ban word
   const handleFailBan = () => {
     setCartesJouees((j) => j + 1);
-    setLastResult("fail");
     const newCards = cartesRestantes.filter((_, i) => i !== randomIndex);
     setCartesRestantes(newCards);
     nextCard(newCards);
@@ -80,13 +74,6 @@ export default function Game({ cards, setIsStarted }: GameProps) {
 
   const currentCard = cartesRestantes[randomIndex];
 
-  const cardBorderClass =
-    lastResult === "success"
-      ? "border-green-deep"
-      : lastResult === "fail"
-        ? "border-red-deep"
-        : "border-border";
-
   return currentCard ? (
     <div className="w-full max-w-md flex flex-col gap-5">
       <div className="flex justify-between text-xs text-ink-muted">
@@ -103,7 +90,7 @@ export default function Game({ cards, setIsStarted }: GameProps) {
       </div>
 
       <div
-        className={`bg-white rounded-2xl border-2 ${cardBorderClass} shadow-md p-8 flex flex-col gap-5 text-center transition-colors duration-300`}
+        className={`bg-white rounded-2xl border-2 shadow-md p-8 flex flex-col gap-5 text-center transition-colors duration-300`}
       >
         <div>
           <p className="text-xs text-ink-muted uppercase tracking-widest mb-2">
