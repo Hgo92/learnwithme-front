@@ -12,7 +12,7 @@ Ce projet réalisé avec NestJS pour la partie back-end et React pour la partie 
 
 #### 27/05/2026 - Refacto de la snackbar
 
-Avant la snackbar était présente et individualisée dans chaque page où elle était nécessaire (10 au total). J'en ai fait une fonction unique (avec le texte voulu en paramètre) et je l'appele là où c'est nécessaire. Comme ça, si je veux changer le timer de fermeture ou ajouter un autre événement au moment de l'utilisation, je peux le faire directement pour toutes les snackbars.
+Avant la snackbar était présente et individualisée dans chaque page où elle était nécessaire (10 au total). J'en ai fait une fonction unique (avec le texte voulu en paramètre) et je l'appelle là où c'est nécessaire. Comme ça, si je veux changer le timer de fermeture ou ajouter un autre événement au moment de l'utilisation, je peux le faire directement pour toutes les snackbars.
 
 #### 26/05/2026 - Ajout d'un schéma de validation Zod
 
@@ -22,3 +22,5 @@ Pour vérifier les données avant l'envoi de mon formulaire de création de comp
 
 - [ ] Ajouter gestion d'erreur dans AddCard/AddDeck/Change etc
 - [ ] Ajouter la gestion de l'IA pour créer des cartes
+- [ ] Ajout d'un timer pour répondre
+- [ ] Modifier le bouton "Question suivante" à la dernière question

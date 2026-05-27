@@ -2,10 +2,13 @@ import { useSnackbar } from "notistack";
 
 export default function useSnack() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  return (text: string) => {
+  return (text: string, time?: number) => {
     enqueueSnackbar(text);
-    setTimeout(() => {
-      closeSnackbar();
-    }, 4000);
+    setTimeout(
+      () => {
+        closeSnackbar();
+      },
+      time ? time : 4000,
+    );
   };
 }
