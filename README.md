@@ -24,3 +24,10 @@ Pour vérifier les données avant l'envoi de mon formulaire de création de comp
 - [ ] Ajouter la gestion de l'IA pour créer des cartes
 - [ ] Ajout d'un timer pour répondre
 - [ ] Modifier le bouton "Question suivante" à la dernière question
+
+#### Idées
+
+// - Choisir le nombre de cartes qu'on veut dans le jeu (ex : deck de 50 cartes, interrogé sur 10)
+// - Gestion de la réussite sur une carte (plus on réussit une carte, moins elle a de chance de revenir)
+// - Heuristique
+// - Check distance LEvenshtein
