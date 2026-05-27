@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import LoginModal from "../components/authentication/LoginModal";
 import RegisterModal from "../components/authentication/RegisterModal";
-import { useSnackbar } from "notistack";
 import { authClient } from "../lib/auth-client";
+import useSnack from "../components/Snackbar";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const snackbar = useSnack();
 
   const handleInvit = async () => {
     const { error } = await authClient.signIn.email({
@@ -18,10 +18,7 @@ export default function Home() {
       console.error("Erreur de connexion :", error.message);
       return;
     }
-    enqueueSnackbar("Connexion réussie en tant qu'invité(e) !");
-    setTimeout(() => {
-      closeSnackbar();
-    }, 4000);
+    snackbar("Connexion réussie en tant qu'invité(e) !");
     navigate("/home");
   };
 

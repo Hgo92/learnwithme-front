@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { api } from "../../lib/api";
-import { useSnackbar } from "notistack";
+import useSnack from "../Snackbar";
 
 interface DeleteProps {
   id: number;
@@ -9,16 +9,13 @@ interface DeleteProps {
 
 export default function Delete({ id, onReload }: DeleteProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const snackbar = useSnack();
 
   const handleDeleteCarte = async (id: number) => {
     await api.deleteCard(id);
     onReload();
     setIsOpen(false);
-    enqueueSnackbar("Carte supprimée !");
-    setTimeout(() => {
-      closeSnackbar();
-    }, 4000);
+    snackbar("Carte supprimée !");
   };
 
   return (

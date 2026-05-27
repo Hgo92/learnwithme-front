@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { api } from "../../lib/api";
-import { useSnackbar } from "notistack";
+import useSnack from "../Snackbar";
 
 interface AddProps {
   deckId: number;
@@ -15,7 +15,7 @@ export default function AddCard({
 }: AddProps) {
   const [mot, setMot] = useState("");
   const [trad, setTrad] = useState("");
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const snackbar = useSnack();
 
   const handleNewCarte = async (mot: string, trad: string, deck_id: number) => {
     await api.createCard({ title: mot, translation: trad, deckId: deck_id });
@@ -23,10 +23,7 @@ export default function AddCard({
     setTrad("");
     onReload();
     setIsAddingCard(false);
-    enqueueSnackbar("Carte ajoutée !");
-    setTimeout(() => {
-      closeSnackbar();
-    }, 4000);
+    snackbar("Carte ajoutée !");
   };
 
   const inputClass =

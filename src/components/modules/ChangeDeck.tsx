@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Deck } from "../../lib/interfaces";
 import { api } from "../../lib/api";
-import { useSnackbar } from "notistack";
+import useSnack from "../Snackbar";
 
 interface DeckProps {
   deck: Deck;
@@ -15,17 +15,14 @@ export default function ChangeDeck({
   setIsEditing,
 }: DeckProps) {
   const [newName, setNewName] = useState(deck.title);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const snackbar = useSnack();
 
   const handleValidateChange = async (newName: string, id: number) => {
     await api.updateDeck(newName, id);
     setNewName("");
     onReload();
     setIsEditing(false);
-    enqueueSnackbar("Deck modifié !");
-    setTimeout(() => {
-      closeSnackbar();
-    }, 4000);
+    snackbar("Deck modifié !");
   };
 
   const inputClass =
