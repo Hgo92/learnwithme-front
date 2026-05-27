@@ -1,73 +1,24 @@
-# React + TypeScript + Vite
+# Learn With Me - Des flashcards pour aider à l'apprentissage des langues
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Le projet
 
-Currently, two official plugins are available:
+Ce projet réalisé avec NestJS pour la partie back-end et React pour la partie front. Vous êtes actuellement sur le repo Git de la partie front.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## React Compiler
+'npm install'
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Logs
 
-## Expanding the ESLint configuration
+#### 27/05/2026 - Refacto de la snackbar
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Avant la snackbar était présente et individualisée dans chaque page où elle était nécessaire (10 au total). J'en ai fait une fonction unique (avec le texte voulu en paramètre) et je l'appele là où c'est nécessaire. Comme ça, si je veux changer le timer de fermeture ou ajouter un autre événement au moment de l'utilisation, je peux le faire directement pour toutes les snackbars.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+#### 26/05/2026 - Ajout d'un schéma de validation Zod
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Pour vérifier les données avant l'envoi de mon formulaire de création de compte, j'ai ajouté un schéma zod.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### To-Do List
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [ ] Ajouter gestion d'erreur dans AddCard/AddDeck/Change etc
+- [ ] Ajouter la gestion de l'IA pour créer des cartes

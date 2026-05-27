@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { authClient } from "../../lib/auth-client";
-import { useSnackbar } from "notistack";
+import useSnack from "../Snackbar";
 import { registerSchema } from "./zod-schema";
 
 export default function RegisterModal({
@@ -9,7 +9,7 @@ export default function RegisterModal({
   closeModal: () => void;
 }) {
   const [error, setError] = useState<string | null>(null);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const snackbar = useSnack();
 
   async function handleRegister(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,10 +35,7 @@ export default function RegisterModal({
       if (authError) {
         setError("🥺 Il y a eu un problème, désolé !");
       }
-      enqueueSnackbar("Inscription réussie, bienvenue sur Learn With Me !");
-      setTimeout(() => {
-        closeSnackbar();
-      }, 5000);
+      snackbar("Inscription réussie, bienvenue sur Learn With Me !");
       closeModal();
     }
   }

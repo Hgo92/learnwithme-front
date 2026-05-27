@@ -1,18 +1,15 @@
 import { Link, useNavigate } from "react-router";
 import { authClient } from "../lib/auth-client";
-import { useSnackbar } from "notistack";
+import useSnack from "./Snackbar";
 
 export default function Navbar() {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const snackbar = useSnack();
   const navigate = useNavigate();
   async function signout() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          enqueueSnackbar("Vous avez été déconnecté(e)!");
-          setTimeout(() => {
-            closeSnackbar();
-          }, 4000);
+          snackbar("Vous avez été déconnecté(e) !");
           navigate("/");
         },
       },

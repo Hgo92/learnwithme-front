@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { authClient } from "../../lib/auth-client";
-import { useSnackbar } from "notistack";
+import useSnack from "../Snackbar";
 
 export default function LoginModal({ closeModal }: { closeModal: () => void }) {
   const [error, setError] = useState<string | null>(null);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const snackbar = useSnack();
 
   async function handleLogin(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,14 +20,11 @@ export default function LoginModal({ closeModal }: { closeModal: () => void }) {
 
     if (authError) {
       setError("Il y a eu un problème, vérifiez vos identifiants !");
-      enqueueSnackbar("Erreur lors de la connexion ! 🥺");
-      setTimeout(() => {
-        closeSnackbar();
-      }, 4000);
+      snackbar("Erreur lors de la connexion ! 🥺");
       return;
     }
 
-    (enqueueSnackbar("Connexion réussie ! Bon retour sur Learn With Me !"),
+    (snackbar("Connexion réussie ! Bon retour sur Learn With Me !"),
       closeModal());
   }
 
