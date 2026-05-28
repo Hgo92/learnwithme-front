@@ -16,8 +16,8 @@ export default function GenerateCard({
   isModalOpen,
 }: GenerateProps) {
   const schema = z.object({
-    count: z.coerce.number(),
-    language: z.string().trim(),
+    count: z.coerce.number().min(1),
+    language: z.string().trim().min(3),
     topic: z.string().trim().optional(),
   });
 
