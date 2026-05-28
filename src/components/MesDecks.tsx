@@ -5,6 +5,7 @@ import ChangeDeck from "./modules/ChangeDeck";
 import DeleteDeck from "./modules/DeleteDeck";
 import Carte from "../components/card/Carte";
 import AddCard from "./modules/AddCard";
+import GenerateCard from "./modules/GenerateCard";
 
 export interface MesDecksProps {
   onReload: () => void;
@@ -14,9 +15,14 @@ export interface MesDecksProps {
 
 export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
   const [isEditing, setIsEditing] = useState(false);
-  const [isAddingCarte, setIsAddingCard] = useState(false);
+  const [isAddingCard, setIsAddingCard] = useState(false);
+  const [isGeneratingCard, setIsGeneratingCard] = useState(false);
 
   const cartesDeck = cards.filter((c) => c.deckId === deck.id);
+  let existingCards = "";
+  cartesDeck.forEach((card) => {
+    existingCards += `title : ${card.title}, translation : ${card.translation} / `;
+  });
 
   return (
     <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
@@ -59,20 +65,37 @@ export default function MesDecks({ deck, cards, onReload }: MesDecksProps) {
           </p>
         )}
 
-        {isAddingCarte ? (
-          <AddCard
-            deckId={deck.id}
-            onReload={onReload}
-            setIsAddingCard={setIsAddingCard}
-          />
-        ) : (
-          <button
-            onClick={() => setIsAddingCard(true)}
-            className="mt-3 w-full py-2.5 rounded-xl text-sm text-indigo-deep border-[1.5px] border-dashed border-indigo-pale bg-transparent hover:bg-indigo-pale/40 transition-colors font-medium"
-          >
-            + Ajouter une carte
-          </button>
-        )}
+        <div className="flex flex-row gap-4">
+          {isAddingCard ? (
+            <AddCard
+              deckId={deck.id}
+              onReload={onReload}
+              setIsAddingCard={setIsAddingCard}
+            />
+          ) : (
+            <button
+              onClick={() => setIsAddingCard(true)}
+              className="mt-3 w-full py-2.5 rounded-xl text-sm text-indigo-deep border-[1.5px] border-dashed border-indigo-pale bg-transparent hover:bg-indigo-pale/40 transition-colors font-medium"
+            >
+              + Ajouter une carte
+            </button>
+          )}
+          {isGeneratingCard ? (
+            <GenerateCard
+              existingCards={existingCards}
+              deckId={deck.id}
+              onReload={onReload}
+              isModalOpen={setIsGeneratingCard}
+            />
+          ) : (
+            <button
+              onClick={() => setIsGeneratingCard(true)}
+              className="mt-3 w-full py-2.5 rounded-xl text-sm text-indigo-deep border-[1.5px] border-dashed border-indigo-pale bg-transparent hover:bg-indigo-pale/40 transition-colors font-medium"
+            >
+              + Générer des cartes automatiquement
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
