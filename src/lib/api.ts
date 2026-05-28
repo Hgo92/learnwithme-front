@@ -1,6 +1,6 @@
 import type { Card, Deck } from "../lib/interfaces";
 
-const apiURL = "https://learn-with-me-nest.onrender.com";
+const apiURL = "https://learn-with-me-nest-production.up.railway.app";
 
 export const api = {
   getDecks: async (): Promise<Deck[]> => {
@@ -118,5 +118,24 @@ export const api = {
       credentials: "include",
     });
     if (!res.ok) throw new Error("Erreur lors de l'activation de la carte");
+  },
+
+  generateCard: async (prompt: {
+    count: number;
+    language: string;
+    deckId: number;
+    existingCards: string;
+    topic?: string;
+  }) => {
+    const res = await fetch(`${apiURL}/cards/generate-ia`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ prompt }),
+    });
+    if (!res.ok) throw new Error("Erreur lors de la génération de cartes");
+    return res.json();
   },
 };

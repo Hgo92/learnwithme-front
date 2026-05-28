@@ -4,7 +4,9 @@ export default function Footer() {
       <p className="text-ink-muted">
         Réalisé par Hugo Monier avec JavaScript (TypeScript - React -
         TailwindCSS) et NestJS (TypeORM - Better Auth) -{" "}
-        <a href="https://github.com/Hgo92/learnwithme-front">Voir le Github</a>
+        <a target="_blank" href="https://github.com/Hgo92/learnwithme-front">
+          Voir le Github
+        </a>
       </p>
     </div>
   );
