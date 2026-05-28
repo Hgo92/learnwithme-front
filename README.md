@@ -10,6 +10,10 @@ Ce projet réalisé avec NestJS pour la partie back-end et React pour la partie 
 
 ### Logs
 
+### 28/05/2026 - Génération de cartes par IA
+
+Vous pouvez maintenant générer des cartes via l'IA (Grok, modèle 'openai/gpt-oss-20b'). Il suffit de mettre le nombre de cartes souhaitées, la langue et éventuellement un sujet. J'ai hésité à limiter le nombre de langues possibles pour éviter les erreurs utilisateurs mais j'ai préféré laisser le choix libre, pour permettre de couvrir le plus de langues possibles, quitte à avoir des erreurs (langue qui n'existe pas, etc).
+
 #### 27/05/2026 - Refacto de la snackbar
 
 Avant la snackbar était présente et individualisée dans chaque page où elle était nécessaire (10 au total). J'en ai fait une fonction unique (avec le texte voulu en paramètre) et je l'appelle là où c'est nécessaire. Comme ça, si je veux changer le timer de fermeture ou ajouter un autre événement au moment de l'utilisation, je peux le faire directement pour toutes les snackbars.
