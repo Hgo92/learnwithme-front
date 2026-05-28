@@ -10,7 +10,11 @@ Ce projet réalisé avec NestJS pour la partie back-end et React pour la partie 
 
 ### Logs
 
-### 28/05/2026 - Génération de cartes par IA
+#### 28/05/2026 Gestion des erreurs sur les routes
+
+Un oubli est vite arrivé ! Pour l'instant, toutes mes routes fonctionnent, mais peut-être que ce ne sera pas le cas demain. Pour éviter de laisser les utilisateurs dans l'inconnu, j'ai ajouté un message d'erreur si une de mes fonctions (ajout de carte, modification, etc) se retrouvait en panne. Un try/catch classique mais toujours utile.
+
+#### 28/05/2026 - Génération de cartes par IA
 
 Vous pouvez maintenant générer des cartes via l'IA (Grok, modèle 'openai/gpt-oss-20b'). Il suffit de mettre le nombre de cartes souhaitées, la langue et éventuellement un sujet. J'ai hésité à limiter le nombre de langues possibles pour éviter les erreurs utilisateurs mais j'ai préféré laisser le choix libre, pour permettre de couvrir le plus de langues possibles, quitte à avoir des erreurs (langue qui n'existe pas, etc).
 
@@ -24,7 +28,7 @@ Pour vérifier les données avant l'envoi de mon formulaire de création de comp
 
 ### To-Do List
 
-- [ ] Ajouter gestion d'erreur dans AddCard/AddDeck/Change etc
+- [x] Ajouter gestion d'erreur dans AddCard/AddDeck/Change etc
 - [x] Ajouter la gestion de l'IA pour créer des cartes
 - [ ] Ajout d'un timer pour répondre
 - [ ] Modifier le bouton "Question suivante" à la dernière question
