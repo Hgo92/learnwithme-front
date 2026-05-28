@@ -21,7 +21,7 @@ Pour vérifier les données avant l'envoi de mon formulaire de création de comp
 ### To-Do List
 
 - [ ] Ajouter gestion d'erreur dans AddCard/AddDeck/Change etc
-- [ ] Ajouter la gestion de l'IA pour créer des cartes
+- [x] Ajouter la gestion de l'IA pour créer des cartes
 - [ ] Ajout d'un timer pour répondre
 - [ ] Modifier le bouton "Question suivante" à la dernière question
 
