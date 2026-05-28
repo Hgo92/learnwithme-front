@@ -18,11 +18,15 @@ export default function ChangeDeck({
   const snackbar = useSnack();
 
   const handleValidateChange = async (newName: string, id: number) => {
-    await api.updateDeck(newName, id);
-    setNewName("");
-    onReload();
-    setIsEditing(false);
-    snackbar("Deck modifié !");
+    try {
+      await api.updateDeck(newName, id);
+      setNewName("");
+      onReload();
+      setIsEditing(false);
+      snackbar("Deck modifié !");
+    } catch (error) {
+      snackbar("Erreur lors de la modification du deck");
+    }
   };
 
   const inputClass =

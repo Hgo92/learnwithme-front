@@ -12,10 +12,14 @@ export default function Delete({ id, onReload }: DeleteProps) {
   const snackbar = useSnack();
 
   const handleDeleteCarte = async (id: number) => {
-    await api.deleteCard(id);
-    onReload();
-    setIsOpen(false);
-    snackbar("Carte supprimée !");
+    try {
+      await api.deleteCard(id);
+      onReload();
+      setIsOpen(false);
+      snackbar("Carte supprimée !");
+    } catch (error) {
+      snackbar("Erreur lors de la suppression de la carte !");
+    }
   };
 
   return (

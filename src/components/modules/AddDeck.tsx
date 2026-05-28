@@ -12,13 +12,20 @@ export default function AddDeck({ setIsVisible, onReload }: AddProps) {
   const snackbar = useSnack();
 
   const newDeck = async (name: string) => {
-    if (!name.trim()) return;
+    if (!name.trim()) {
+      snackbar("Veuillez entrer un nom");
+      return;
+    }
 
-    await api.createDeck({ title: name });
-    setName("");
-    setIsVisible(false);
-    onReload();
-    snackbar("Deck créé !");
+    try {
+      await api.createDeck({ title: name });
+      setName("");
+      setIsVisible(false);
+      onReload();
+      snackbar("Deck créé !");
+    } catch (error) {
+      snackbar("Erreur lors de la création du deck");
+    }
   };
   return (
     <div className="flex gap-2 items-center">

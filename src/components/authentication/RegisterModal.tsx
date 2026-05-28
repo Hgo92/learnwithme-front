@@ -34,6 +34,7 @@ export default function RegisterModal({
 
       if (authError) {
         setError("🥺 Il y a eu un problème, désolé !");
+        return;
       }
       snackbar("Inscription réussie, bienvenue sur Learn With Me !");
       closeModal();

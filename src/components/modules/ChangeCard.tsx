@@ -33,10 +33,14 @@ export default function ChangeCard({
       isArchived: archived,
       deckId: deckId,
     };
-    api.updateCard(newCard, id);
-    onReload();
-    setIsEditing(false);
-    snackbar("Carte modifiée !");
+    try {
+      api.updateCard(newCard, id);
+      onReload();
+      setIsEditing(false);
+      snackbar("Carte modifiée !");
+    } catch (error) {
+      snackbar("Erreur lors de la modification de la carte");
+    }
   };
 
   const inputClass =

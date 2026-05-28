@@ -18,12 +18,20 @@ export default function AddCard({
   const snackbar = useSnack();
 
   const handleNewCarte = async (mot: string, trad: string, deck_id: number) => {
-    await api.createCard({ title: mot, translation: trad, deckId: deck_id });
-    setMot("");
-    setTrad("");
-    onReload();
-    setIsAddingCard(false);
-    snackbar("Carte ajoutée !");
+    try {
+      await api.createCard({
+        title: mot,
+        translation: trad,
+        deckId: deck_id,
+      });
+      setMot("");
+      setTrad("");
+      onReload();
+      setIsAddingCard(false);
+      snackbar("Carte ajoutée !");
+    } catch (error) {
+      snackbar("Il y a eu une erreur lors de la création de carte");
+    }
   };
 
   const inputClass =

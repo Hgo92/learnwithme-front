@@ -12,10 +12,14 @@ export default function DeleteDeck({ id, onReload }: DeleteDeckProps) {
   const snackbar = useSnack();
 
   const handleDeleteDeck = async (id: number) => {
-    await api.deleteDeck(id);
-    onReload();
-    setIsOpen(true);
-    snackbar("Deck supprimé !");
+    try {
+      await api.deleteDeck(id);
+      onReload();
+      setIsOpen(true);
+      snackbar("Deck supprimé !");
+    } catch (error) {
+      snackbar("Erreur lors de la suppression du deck !");
+    }
   };
 
   return (
